@@ -46992,7 +46992,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       this.refs["0-key"].focus();
     }
     onTab(row, col, e) {
-      const headers = this.props.message[this.props.type];
+      const headers = this.props.message[this.props.type] || Array();
       if (col === 0) {
         this._nextSel = `${row}-value`;
         return;
@@ -47002,7 +47002,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         return;
       }
       e.preventDefault();
-      const nextHeaders = _.cloneDeep(this.props.message[this.props.type]);
+      const nextHeaders = _.cloneDeep(headers);
       nextHeaders.push(["Name", "Value"]);
       this.props.onChange(nextHeaders);
       this._nextSel = `${row + 1}-key`;
@@ -47059,7 +47059,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           onDone: (val) => this.onChange(i, 1, val),
           onRemove: (event) => this.onRemove(i, 1, event),
           onTab: (event) => this.onTab(i, 1, event)
-        }))))));
+        })))), /* @__PURE__ */ import_react32.default.createElement("tr", null, !readonly && /* @__PURE__ */ import_react32.default.createElement("td", {
+          width: "24px",
+          onClick: (event) => this.onTab(message[this.props.type].length - 1, 1, event)
+        }, /* @__PURE__ */ import_react32.default.createElement("i", {
+          className: "fa fa-fw fa-plus-circle"
+        })))));
       } else {
         return /* @__PURE__ */ import_react32.default.createElement("table", {
           className: "header-table"

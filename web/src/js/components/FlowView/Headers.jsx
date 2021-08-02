@@ -80,7 +80,7 @@ export default class Headers extends Component {
     }
 
     onTab(row, col, e) {
-        const headers = this.props.message[this.props.type]
+        const headers = this.props.message[this.props.type] || Array()
 
         if (col === 0) {
             this._nextSel = `${row}-value`
@@ -93,7 +93,7 @@ export default class Headers extends Component {
 
         e.preventDefault()
 
-        const nextHeaders = _.cloneDeep(this.props.message[this.props.type])
+        const nextHeaders = _.cloneDeep(headers)
         nextHeaders.push(['Name', 'Value'])
         this.props.onChange(nextHeaders)
         this._nextSel = `${row + 1}-key`
@@ -163,6 +163,18 @@ export default class Headers extends Component {
                             </td>
                         </tr>
                     ))}
+                    <tr>
+                        {
+                            !readonly && (
+                                <td
+                                    width='24px'
+                                    onClick={event => this.onTab(message[this.props.type].length-1, 1, event)}
+                                >
+                                    <i className='fa fa-fw fa-plus-circle'/>
+                                </td>
+                            )
+                        }
+                    </tr>
                     </tbody>
                 </table>
             )
@@ -172,7 +184,7 @@ export default class Headers extends Component {
                     <tbody>
                     </tbody>
                 </table>
-            )  
+            )
         }
     }
 }

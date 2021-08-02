@@ -10,7 +10,7 @@ OptionMenu.title = 'Options'
 
 function OptionMenu({ openOptions }) {
     return (
-        <div>
+        <div className="options-menu">
             <HideInStatic>
                 <div className="menu-group">
                     <div className="menu-content">

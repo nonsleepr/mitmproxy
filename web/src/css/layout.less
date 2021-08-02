@@ -26,6 +26,10 @@ html, body, #container, #mitmproxy {
     display: flex;
     flex-direction: row;
 
+    @media (max-width: @screen-xs-max) {
+        flex-direction: column;
+    }
+
     &.vertical {
         flex-direction: column;
     }

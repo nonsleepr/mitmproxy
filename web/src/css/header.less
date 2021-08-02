@@ -19,12 +19,18 @@ header {
     }
 }
 
+.flow-menu {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: scroll hidden;
+}
+
 @menu-legend-height: 16px;
 @menu-group-hmargin: 5px;
 .menu-group {
     margin: 0 @menu-group-hmargin 0 (@menu-group-hmargin + 1px);
-    display: inline-block;
     height: @menu-height;
+    flex: 0 0 auto;
 }
 
 .menu-content {
@@ -81,14 +87,8 @@ header {
     padding: 0 5px;
 }
 
-.menu-group + .menu-group:before {
-    @space: 10px;
-    margin-left: -(@menu-group-hmargin + 1px);
-    content: " ";
+.menu-group + .menu-group {
     border-left: solid 1px lighten(grey, 40%);
-    margin-top: @space;
-    height: @menu-height - @space*2;
-    position: absolute;
 }
 
 @menu-main-gutter-width: 5px;

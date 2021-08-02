@@ -116,6 +116,12 @@ export default class Headers extends Component {
         }
     }
 
+    onRowRemove(i, e) {
+        const nextHeaders = _.cloneDeep(this.props.message[this.props.type])
+        nextHeaders.splice(i, 1)
+        this.props.onChange(nextHeaders)
+    }
+
     render() {
         const { message, readonly } = this.props
         if (message[this.props.type]) {
@@ -124,6 +130,16 @@ export default class Headers extends Component {
                     <tbody>
                     {message[this.props.type].map((header, i) => (
                         <tr key={i}>
+                            {
+                                !readonly && (
+                                    <td
+                                        width='24px'
+                                        onClick={event => this.onRowRemove(i, event)}
+                                    >
+                                        <i className='fa fa-fw fa-trash'/>
+                                    </td>
+                                )
+                            }
                             <td className="header-name">
                                 <HeaderEditor
                                     ref={`${i}-key`}

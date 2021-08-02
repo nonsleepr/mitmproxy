@@ -25,6 +25,14 @@ const defaultState = {
     maxContentLines: 80,
 }
 
+
+function replaceHeaders(objValue, srcValue, key) {
+    if (key == "headers" && !!srcValue) {
+        return srcValue
+    }
+    return undefined
+}
+
 export default function reducer(state = defaultState, action) {
     let wasInEditMode = state.modifiedFlow
 
@@ -44,7 +52,7 @@ export default function reducer(state = defaultState, action) {
         case UPDATE_EDIT:
             return {
                 ...state,
-                modifiedFlow: _.merge({}, state.modifiedFlow, action.update)
+                modifiedFlow: _.mergeWith({}, state.modifiedFlow, action.update, replaceHeaders)
             }
 
         case flowsActions.SELECT:

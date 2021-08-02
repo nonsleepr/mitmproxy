@@ -45427,6 +45427,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     content: [],
     maxContentLines: 80
   };
+  function replaceHeaders(objValue, srcValue, key) {
+    if (key == "headers" && !!srcValue) {
+      return srcValue;
+    }
+    return void 0;
+  }
+  __name(replaceHeaders, "replaceHeaders");
   function reducer(state = defaultState3, action) {
     let wasInEditMode = state.modifiedFlow;
     let content = action.content || state.content;
@@ -45442,7 +45449,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       case UPDATE_EDIT:
         return {
           ...state,
-          modifiedFlow: import_lodash3.default.merge({}, state.modifiedFlow, action.update)
+          modifiedFlow: import_lodash3.default.mergeWith({}, state.modifiedFlow, action.update, replaceHeaders)
         };
       case SELECT:
         return {
@@ -47015,6 +47022,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         this.refs[`${row - 1}-value`].focus();
       }
     }
+    onRowRemove(i, e) {
+      const nextHeaders = _.cloneDeep(this.props.message[this.props.type]);
+      nextHeaders.splice(i, 1);
+      this.props.onChange(nextHeaders);
+    }
     render() {
       const { message, readonly } = this.props;
       if (message[this.props.type]) {
@@ -47022,7 +47034,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           className: "header-table"
         }, /* @__PURE__ */ import_react32.default.createElement("tbody", null, message[this.props.type].map((header, i) => /* @__PURE__ */ import_react32.default.createElement("tr", {
           key: i
-        }, /* @__PURE__ */ import_react32.default.createElement("td", {
+        }, !readonly && /* @__PURE__ */ import_react32.default.createElement("td", {
+          width: "24px",
+          onClick: (event) => this.onRowRemove(i, event)
+        }, /* @__PURE__ */ import_react32.default.createElement("i", {
+          className: "fa fa-fw fa-trash"
+        })), /* @__PURE__ */ import_react32.default.createElement("td", {
           className: "header-name"
         }, /* @__PURE__ */ import_react32.default.createElement(HeaderEditor, {
           ref: `${i}-key`,

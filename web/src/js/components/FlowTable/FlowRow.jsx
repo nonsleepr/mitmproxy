@@ -25,7 +25,7 @@ function FlowRow({ flow, selected, highlighted, onSelect, displayColumnNames }) 
     const displayColumns = getDisplayColumns(displayColumnNames)
 
     return (
-        <tr className={className} onClick={() => onSelect(flow.id)}>
+        <tr className={className} onClick={(event) => {event.stopPropagation(); onSelect(flow.id)}}>
             {displayColumns.map(Column => (
                 <Column key={Column.name} flow={flow}/>
             ))}

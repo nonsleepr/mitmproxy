@@ -97,7 +97,7 @@ class FlowTable extends React.Component {
         const isHighlighted = highlight ? Filt.parse(highlight) : () => false
 
         return (
-            <div className="flow-table" onScroll={this.onViewportUpdate}>
+            <div className="flow-table" onScroll={this.onViewportUpdate} onClick={() => this.props.selectFlow(null)}>
                 <table>
                     <thead ref="head" style={{ transform: `translateY(${viewportTop}px)` }}>
                         <FlowTableHead />
